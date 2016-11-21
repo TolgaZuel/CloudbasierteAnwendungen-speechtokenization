@@ -1,5 +1,5 @@
 /**
- * Dies ist die Dokumentation des Tokernizers von OpenNLP. Segmentierung von Text in Tokens
+ * Dies ist die Dokumentation des Tokernizer von OpenNLP. Segmentierung von Text in Tokens
  * @author  Tolga Zülfikaroglu
  * @version 0.1
  */
