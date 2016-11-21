@@ -20,6 +20,7 @@ public static void main(final String args[]) throws IOException {
      * Modell en-token.bin basiert auf englischer Sprache
      */
 	
+	
 InputStream is = new FileInputStream("models/en-token.bin");
 TokenizerModel model = new TokenizerModel(is);
 is.close();
