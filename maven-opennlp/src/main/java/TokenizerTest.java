@@ -19,6 +19,7 @@ public static void main(final String args[]) throws IOException {
      * trainiertes Modell laden
      * Modell en-token.bin basiert auf englischer Sprache
      */
+	
 InputStream is = new FileInputStream("models/en-token.bin");
 TokenizerModel model = new TokenizerModel(is);
 is.close();
@@ -29,7 +30,7 @@ is.close();
  * Segmentiert einen String in Tokens
  */
 Tokenizer tokenizer = new TokenizerME(model);
-String tokens[] = tokenizer.tokenize("Hello my name is Tolga and i study business information at the University of Stuttgart");
+String tokens[] = tokenizer.tokenize("Hello my name is Tolga and i study business informattics at the Media University Stuttgart.");
 
 /**
  * Ausgabe der Tokens
