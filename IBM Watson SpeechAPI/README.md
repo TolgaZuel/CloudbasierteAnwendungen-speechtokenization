@@ -1,9 +1,8 @@
-IBM Watson Speech Services for Web Browsers
+IBM Watson Speech API für JavaScript - Node.JS
 ===========================================
 
 [![Build Status](https://travis-ci.org/watson-developer-cloud/speech-javascript-sdk.svg?branch=master)](https://travis-ci.org/watson-developer-cloud/speech-javascript-sdk)
 [![npm-version](https://img.shields.io/npm/v/watson-speech.svg)](https://www.npmjs.com/package/watson-speech)
-
 
 Vorrausetzungen:
 
@@ -11,8 +10,7 @@ Plattform Anforderungen: Nose.js und npm
 
 Downloadlink: https://nodejs.org/en/
 
-
-Setup – Node.js
+## Setup Node.js
 
 1.Wechsel mit dem cd Befehl in der Konsole (Terminal cmd) in den examples/ Verzeichnis des heruntergeladenen IBM Speech-To-Text Projektes und führe anschließend npm install aus, um die Dependencies herzuholen.
 
@@ -21,7 +19,6 @@ Setup – Node.js
 3.Starte die Applikation mit npm start
 
 4.Öffnen einen Browser und rufe http://localhost:3000/ auf, um die Beispiele aufzuführen.
-
 
 Die Beispiele verwenden einen Node.js Server, um einen Token zu generien. Die Beispiele müssen nicht zwingend in Nose.js geschrieben werden, jedoch ist ein serverseitiger Tokengenerator erforderlich.
 
@@ -36,6 +33,23 @@ Es gibt grundlegend zwei Methoden um mit der JavaScript SDK zu interagieren:
 ·       recognizeMicrophone() für Live-Mikrofoninput
 
 ·       recognizeFile() für Datei <input>'s
+
+## [`WatsonSpeech.SpeechToText`](http://watson-developer-cloud.github.io/speech-javascript-sdk/master/module-watson-speech_speech-to-text.html)
+
+
+### [`.recognizeMicrophone({token})`](http://watson-developer-cloud.github.io/speech-javascript-sdk/master/module-watson-speech_speech-to-text_recognize-microphone.html) -> Stream
+
+Options: 
+* `keepMic`: if true, preserves the MicrophoneStream for subsequent calls, preventing additional permissions requests in Firefox
+* Other options passed to [RecognizeStream]
+* Other options passed to [WritableElementStream] if `options.outputElement` is set
+
+Requires the `getUserMedia` API, so limited browser compatibility (see http://caniuse.com/#search=getusermedia) 
+Also note that Chrome requires https (with a few exceptions for localhost and such) - see https://www.chromium.org/Home/chromium-security/prefer-secure-origins-for-powerful-new-features
+
+Pipes results through a [FormatStream] by default, set `options.format=false` to disable.
+
+Known issue: Firefox continues to display a microphone icon in the address bar after recording has ceased. This is a browser bug.
 
 ### [`.recognizeFile({data, token})`](http://watson-developer-cloud.github.io/speech-javascript-sdk/master/module-watson-speech_speech-to-text_recognize-file.html) -> Stream
 
