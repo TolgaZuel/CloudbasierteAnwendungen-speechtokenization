@@ -11,15 +11,16 @@ Plattform Anforderungen: Nose.js und npm
 
 Downloadlink: https://nodejs.org/en/
 
+
 Setup – Node.js
 
-1.    Wechsel mit dem cd Befehl in der Konsole (Terminal cmd) in den examples/ Verzeichnis des heruntergeladenen IBM Speech-To-Text Projektes und führe anschließend npm install aus, um die Dependencies herzuholen.
+1.Wechsel mit dem cd Befehl in der Konsole (Terminal cmd) in den examples/ Verzeichnis des heruntergeladenen IBM Speech-To-Text Projektes und führe anschließend npm install aus, um die Dependencies herzuholen.
 
-2.     Bearbeite stt-token.js, um den zuvor erstellen Benachrichtigungsnachweis einzufügen.
+2.Bearbeite stt-token.js, um den zuvor erstellen Benachrichtigungsnachweis einzufügen.
 
-3.     Starte die Applikation mit npm start
+3.Starte die Applikation mit npm start
 
-4.     Öffnen deinen Browser und rufe http://localhost:3000/ auf, um die Beispiele aufzuführen.
+4.Öffnen einen Browser und rufe http://localhost:3000/ auf, um die Beispiele aufzuführen.
 
 
 Die Beispiele verwenden einen Node.js Server, um einen Token zu generien. Die Beispiele müssen nicht zwingend in Nose.js geschrieben werden, jedoch ist ein serverseitiger Tokengenerator erforderlich.
@@ -28,8 +29,7 @@ Die Speech SDK kann in Browserfiy (Modularisierung des Codes) oder kann als Stan
 
 Für alle API Methoden ist ein Authentifizierungs-Token erforderlich, das serverseitig erzeugt werden muss.
 
-
-Speech-To-Text Methoden:
+## Speech-To-Text Methoden
 
 Es gibt grundlegend zwei Methoden um mit der JavaScript SDK zu interagieren:
 
