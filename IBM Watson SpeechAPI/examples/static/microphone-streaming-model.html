@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Watson Speech to Text Client Beispiel - benutzerdefiniertes-Modell</title>
+</head>
+<body>
+
+<section>
+    <h2>Aufnahme vom Mikrofon</h2>
+    <p>Model: <select id="model"></select> <small><i>Wähle das Modell für die Spracherkennung aus.</i></small></p>
+    <button id="button">Start Mikrofon-Aufnahme</button>
+    <button id="stop">Stop</button>
+
+    <h2>Ausgabe:</h2>
+    <div id="output">--</div>
+</section>
+
+<script src="watson-speech.js"></script>
+<!-- window.fetch pollyfill for IE/Edge & Older Chrome/FireFox -->
+<script src="bower_components/fetch/fetch.js"></script>
+
+<h2>Code fuer dieses Beispiel:</h2>
+
+<pre><code><script style="display: block;">
+function getTtsToken() {
+  return fetch('/api/speech-to-text/token')
+    .then(function(response) {
+      return response.text();
+    });
+}
+
+// Beziehen der Modelle und Befüllung des Dropdown-Menüs
+getTtsToken()
+  .then(function (token) {
+    return WatsonSpeech.SpeechToText.getModels({token: token});
+  }).then(function (models) {
+
+    var dropdown = document.querySelector('#model');
+    models.forEach(function (m) {
+      var o = document.createElement('option');
+      o.value = m.name;
+      o.textContent = m.name;
+      if (m.name == 'en-US_BroadbandModel') {
+        o.selected = true;
+      }
+      dropdown.appendChild(o);
+    });
+
+  }).catch(console.error.bind(console));
+
+// Erkennung des Textes durch Verwendung des benutzerdefiniertes Models
+document.querySelector('#button').onclick = function () {
+  getTtsToken().then(function (token) {
+
+    var stream = WatsonSpeech.SpeechToText.recognizeMicrophone({
+        token: token,
+        model: document.querySelector('#model').value,
+        outputElement: '#output' // CSS selector oder DOM Element
+    });
+
+    stream.on('error', function(err) {
+        console.log(err);
+    });
+
+    document.querySelector('#stop').onclick = stream.stop.bind(stream);
+
+  }).catch(function(error) {
+      console.log(error);
+  });
+};
+
+</script></code></pre>
+
+</body>
+</html>

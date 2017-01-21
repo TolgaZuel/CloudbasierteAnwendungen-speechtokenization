@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Watson Speech to Text Client Beispiel</title>
+</head>
+<body>
+
+<section>
+  <h2>Umwandlung der Audiodatei mit <code>{resultsBySpeaker: true}</code>, Ausgabe zur Konsole</h2>
+  <button id="button">Audiodatei Umwandeln</button>
+  <button id="stop">Stopp</button>
+
+  <h2>Ausgabe:</h2>
+  <div id="output">Öffne die Konsoles des Browsers um die Ausgabe anzuschauen. Notiz: Es wird etwas dauern, bis die Ergebnisse erscheinen.</div>
+</section>
+
+<script src="watson-speech.js"></script>
+<!-- window.fetch pollyfill for IE/Edge & Older Chrome/FireFox -->
+<script src="bower_components/fetch/fetch.js"></script>
+
+<h2>Code Für dieses Beispiel:</h2>
+
+<pre><code><script style="display: block;">
+
+  // preloading the data for a smoother experience
+  var preloadTokenAndAudio = Promise.all([
+    fetch('/api/speech-to-text/token').then(function(response) {
+      return response.text();
+    }),
+    fetch('/en-us-multi-speaker-narrowband.wav').then(function(response) {
+      return response.blob();
+    })
+  ]);
+
+  document.querySelector('#button').onclick = function () {
+    preloadTokenAndAudio.then(function (values) {
+      var token = values[0];
+      var file = values[1];
+
+      var stream = WatsonSpeech.SpeechToText.recognizeFile({
+        token: token,
+        data: file,
+        // Nur bestimmte Modelle unterstützen Lautsprecher-Labels
+        // siehe hierzu, http://www.ibm.com/watson/developercloud/doc/speech-to-text/output.shtml#speaker_labels
+        model: 'en-US_NarrowbandModel',
+        resultsBySpeaker: true, // Rohre Ergebnisse die durch den SpeakerSteam hervorgerufen werden und es werden speaker_labels and objectMode aktiviert.
+        realtime: false, // Verhindert das Ergebnisse nicht verlangsamt werden, wenn die Umwandlung schneller stattfindet als die Wiedergabe der Audiodatei
+        play: true
+      });
+
+      stream.on('data', function(data) {
+        // SpeakerStream's data Events unterscheiden sich darin, dass die meisten mehrfach Ergebnisobjekte enthalten. 
+
+        // Die Ergebnis-Objekte ähneln denen, die vom RecognizeStream zurückgegeben werden, außer das sie jeweils einen Lautsprecher-Schlüssel mit einem numerischen Wert haben.
+ 
+        console.log(data);
+      });
+
+      stream.on('error', function(err) {
+        console.log(err);
+      });
+
+      document.querySelector('#stop').onclick = stream.stop.bind(stream);
+
+    }).catch(function(error) {
+      console.log(error);
+    });
+  };
+
+</script></code></pre>
+
+</body>
+</html>
