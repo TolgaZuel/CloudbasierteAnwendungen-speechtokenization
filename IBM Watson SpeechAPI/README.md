@@ -14,7 +14,7 @@ Downloadlink: https://nodejs.org/en/
 
 1.Wechsel mit dem cd Befehl in der Konsole (Terminal cmd) in den examples/ Verzeichnis des heruntergeladenen IBM Speech-To-Text Projektes und führe anschließend npm install aus, um die Dependencies herzuholen.
 
-2.Bearbeite stt-token.js, um den zuvor erstellen Benachrichtigungsnachweis einzufügen.
+2.Bearbeite stt-token.js, um den zuvor erstellen Berechtigungsnachweis (Credentials) einzufügen.
 
 3.Starte die Applikation mit npm start
 
