@@ -8,7 +8,7 @@ var final_transcript = '';
 var recognizing = false;
 var ignore_onend;
 
-/* Überprüft ob die Web Speech API von dem Brower untersützt wird. 
+/* Überprüft ob die Web Speech API von dem Browser untersützt wird. 
 * Hierbei wird geprüft ob webkitSPeechRecognition Objekt existert, falls das nicht der Fall ist: Aufforderung den Browser upzudaten.
 */
 if (!('webkitSpeechRecognition' in window)) {
@@ -16,7 +16,8 @@ if (!('webkitSpeechRecognition' in window)) {
 } else {
   start_button.style.display = 'inline-block';
   
-/* Falls webkitSPeechRecognition Objekt existiert, wird der Zugriff auf das Mikrofon erlaubt und die Spracherkennungs-Schnitstelle (SpeechRecognition Interface) bereitgestellt.
+/* Falls webkitSPeechRecognition Objekt existiert, wird der Zugriff auf das Mikrofon erlaubt und die Spracherkennungs-Schnitstelle
+* (SpeechRecognition Interface) bereitgestellt.
 * Der Wert true für @continuous bestimmt, das wenn der Benutzer während des Sprechers pausiert, die Spracherkennung forgesetzt wird.
 */
 
@@ -24,12 +25,13 @@ if (!('webkitSpeechRecognition' in window)) {
   recognition.continuous = true;
   
 /* Der Standardwert für interimResults ist false, was beudetet, das die Ergebnisse die vom Spracherkenner zurückgeliefert werden, 
-* undgültig sind und sich daher nicht ändern werden. Beim Setzen des true Wertes, werden zunächst Zwischenergebnisse angezeigt und anschließend Endergebnisse als schwarz markiert.
+* undgültig sind und sich daher nicht ändern werden. Beim Setzen des true Wertes, werden zunächst Zwischenergebnisse angezeigt 
+* und anschließend Endergebnisse.
 */
   recognition.interimResults = false;
 
-/* Nach Beginn der Sprachaufnahme, wird der @onstart Event-Handler aufgerufen. Bei jedem neuen erzeugtem Ergebniss, wird der @onresult Event-Handler aufgerufen. 
-* @recognizing = true: Hier wird der Zustand des Mikrofons überprüft, falls es nicht aktiv ist, wird ein Erorr Symbol anzeigt.
+/* Nach Beginn der Sprachaufnahme, wird der @onstart Event-Handler aufgerufen. Bei jedem neuen erzeugtem Ergebnis, wird der @onresult Event-Handler aufgerufen. 
+* @recognizing = true: Hier wird der Zustand des Mikrofons überprüft: falls es nicht aktiv ist, wird ein Erorr Symbol anzeigt.
 */
   recognition.onstart = function() {
     recognizing = true;
@@ -135,7 +137,7 @@ function startButton(event) {
   final_transcript = '';
   recognition.lang = "en-US";
   
-/* Die Funktion recognition.start aktiviert die Spracherkennung anschließend ruft es den onstart Event-Handler auf.
+/* Die Funktion recognition.start aktiviert die Spracherkennung, anschließend ruft es den onstart Event-Handler auf.
 */
   recognition.start();
   ignore_onend = false;
