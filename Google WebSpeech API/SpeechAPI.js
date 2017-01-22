@@ -21,6 +21,7 @@ if (!('webkitSpeechRecognition' in window)) {
 * Der Wert true für @continuous bestimmt, das wenn der Benutzer während des Sprechers pausiert, die Spracherkennung forgesetzt wird.
 */
 
+  
   var recognition = new webkitSpeechRecognition();
   recognition.continuous = true;
   
@@ -60,7 +61,7 @@ if (!('webkitSpeechRecognition' in window)) {
     }
   };
 
-  
+
 /* Hier wird die Funktion recognition.onend aufrufen, falls die Sprachaufnahme beendet wurde. Der default Wert ist für recognizing false.
 */
   recognition.onend = function() {
