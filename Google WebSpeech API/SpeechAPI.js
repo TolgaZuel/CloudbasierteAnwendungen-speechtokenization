@@ -88,6 +88,7 @@ if (!('webkitSpeechRecognition' in window)) {
 * Parameter final_transcript wird in einen Text umgewandelt und anschließend in HTML konvertiert.
 * 
 */
+
   
   recognition.onresult = function(event) {
     var interim_transcript = '';
